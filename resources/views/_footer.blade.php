@@ -1,4 +1,4 @@
-    <footer class=" bg-dark bg-opacity-75 p-2 fw-light text-white">
+    <footer class="bg-dark bg-opacity-75 p-2 fw-light text-white">
         <div>
             Car Rental Management
             <p class="text-center mt-3">Copyright@2024 Tous droit réservé</p>
