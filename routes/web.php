@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// routes/web.php
+
+// Routes pour les pages statiques gérées par PageController
+Route::get('/', [PageController::class, 'acceuil'])->name('acceuil');
+Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+Route::get('/cars', [PageController::class, 'cars'])->name('cars');
+Route::get('/inscription', [PageController::class, 'register'])->name('register');
+Route::get('/connexion', [PageController::class, 'login'])->name('login');
+
