@@ -32,10 +32,10 @@
               </li>
               <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active fs-5 text-white fw-light mx-3" href="{{ route('login') }}">Connexion</a>
+                    <a class="nav-link active fs-5 text-white fw-light mx-3" href="{{ route('login_page') }}">Connexion</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fs-5 text-white fw-light mx-3" href="{{ route('register') }}">Inscription</a>
+                    <a class="nav-link fs-5 text-white fw-light mx-3" href="{{ route('register_page') }}">Inscription</a>
                 </li>
             </ul>
             </ul>

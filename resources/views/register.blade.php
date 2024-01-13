@@ -1,7 +1,8 @@
 @include('_header')
 <section class="login">
     <div class="container d-flex justify-content-center align-items-center login-container">
-        <form class="w-50 mt-5 px-5 py-3 form">
+        <form class="w-50 mt-5 px-5 py-3 form" method="POST" action="{{ route('register') }}">
+          @csrf
             <div class="mb-3">
                 <label for="exampleInputName" class="form-label">Nom d'utilisateur</label>
                 <input type="text" class="form-control" id="exampleInputName">
@@ -23,7 +24,7 @@
                 <label class="form-check-label" for="exampleCheck1">Cochez moi</label>
             </div>
             <button type="submit" class="btn btn-success">S'inscrire</button>
-            <p class="mt-3">Vous avez déjà un compte <i><a href="{{ route('login') }}" class="text-black">connectez-vous</a></i></p>
+            <p class="mt-3">Vous avez déjà un compte <i><a href="{{ route('login_page') }}" class="text-black">connectez-vous</a></i></p>
           </form>
     </div>
 </section>

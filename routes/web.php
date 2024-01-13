@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,6 @@ use App\Http\Controllers\PageController;
 Route::get('/', [PageController::class, 'acceuil'])->name('acceuil');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/cars', [PageController::class, 'cars'])->name('cars');
-Route::get('/inscription', [PageController::class, 'register'])->name('register');
-Route::get('/connexion', [PageController::class, 'login'])->name('login');
-
+Route::get('/register', [PageController::class, 'register'])->name('register_page');
+Route::get('/login', [PageController::class, 'login'])->name('login_page');
+Route::post('/register', [UserController::class ,'register'])->name('register');
