@@ -10,36 +10,54 @@
     <title>Car Rental Management</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-success fixed-top header">
-        <div class="container-fluid">
-          <a class="navbar-brand mx-3 fs-5 text-white fw-medium" href="#">Car Rental Management</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse"></div>
-          <div class="collapse navbar-collapse"></div>
-          <div class="collapse navbar-collapse"></div>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+<nav class="navbar navbar-expand-lg bg-success fixed-top header">
+  <div class="container-fluid">
+      <a class="navbar-brand mx-3 fs-5 text-white fw-medium" href="#">Car Rental Management</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse"></div>
+      <div class="collapse navbar-collapse"></div>
+      <div class="collapse navbar-collapse"></div>
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active fs-5 text-white fw-light mx-3" href="{{ route('acceuil') }}">Acceuil</a>
+                  <a class="nav-link active fs-5 text-white fw-light mx-3" href="{{ route('acceuil') }}">Accueil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fs-5 text-white fw-light mx-3" href="{{ route('cars') }}">Nos voitures</a>
+                  <a class="nav-link fs-5 text-white fw-light mx-3" href="{{ route('cars') }}">Nos voitures</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link fs-5 text-white fw-light mx-3" href="{{ route('contact') }}">Contact</a>
+                  <a class="nav-link fs-5 text-white fw-light mx-3" href="{{ route('contact') }}">Contact</a>
               </li>
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active fs-5 text-white fw-light mx-3" href="{{ route('login_page') }}">Connexion</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link fs-5 text-white fw-light mx-3" href="{{ route('register_page') }}">Inscription</a>
-                </li>
-            </ul>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    
+              
+              <!-- Onglets pour un utilisateur connecté -->
+              @auth
+                  <li class="nav-item">
+                      <a class="nav-link fs-5 text-white fw-light mx-3" href="{{ route('contact') }}">Mes Locations</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link fs-5 text-white fw-light mx-3" href="{{ route('logout') }}">Déconnexion</a>
+                  </li>
+              @endauth
+              
+              <!-- Onglets pour un administrateur -->
+              @if(Auth::user() && Auth::user()->role === 'admin')
+                  <li class="nav-item">
+                      <a class="nav-link fs-5 text-white fw-light mx-3" href="{{ route('contact') }}">Dashboard</a>
+                  </li>
+              @endif
+   
+              <!-- Onglets pour un utilisateur non connecté -->
+              @guest
+                  <li class="nav-item">
+                      <a class="nav-link active fs-5 text-white fw-light mx-3" href="{{ route('login_page') }}">Connexion</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link fs-5 text-white fw-light mx-3" href="{{ route('register_page') }}">Inscription</a>
+                  </li>
+              @endguest
+          </ul>
+      </div>
+  </div>
+</nav>
