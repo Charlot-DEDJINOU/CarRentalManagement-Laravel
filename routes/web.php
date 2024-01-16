@@ -23,4 +23,6 @@ Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/cars', [PageController::class, 'cars'])->name('cars');
 Route::get('/register', [PageController::class, 'register'])->name('register_page');
 Route::get('/login', [PageController::class, 'login'])->name('login_page');
-Route::post('/register', [UserController::class ,'register'])->name('register');
+Route::post('/register', [UserController::class ,'resgiter'])->name('register');
+Route::post('/login', [UserController::class ,'login'])->name('login');
+Route::get('/logout', [UserController::class ,'logout'])->name('logout');
