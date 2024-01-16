@@ -18,6 +18,7 @@ return new class extends Migration
             $table->year('year');
             $table->string('registration_number');
             $table->string('images');
+            $table->text('description')->nullable(); // Nouveau champ "description"
             $table->boolean('availability')->default(true);
             $table->timestamps();
         });
