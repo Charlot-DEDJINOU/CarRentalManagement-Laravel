@@ -17,7 +17,7 @@ class PageController extends Controller
     }
 
     public function register() {
-        return view('register');
+        return view('register',['error' => false]);
     }
 
     public function cars() {
