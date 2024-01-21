@@ -1,7 +1,7 @@
 @include('_header')
 <section class="login">
     <div class="container d-flex justify-content-center align-items-center login-container">
-        <form class="w-50 my-5 px-5 py-3 form" method="POST" action="{{ route('register') }}">
+        <form class="w-50 my-5 px-5 py-3 form" method="POST" action="{{ route('user.register') }}">
           @csrf
             <div class="mb-3">
                 <label for="exampleInputName" class="form-label">Nom d'utilisateur</label>
@@ -22,13 +22,13 @@
             @if($error)
                 <div class="mb-3 alert alert-danger">
                     @if($nameError)
-                        <span class="mb-2">{{ $nameError }}</span>
+                        <span class="mb-2 d-inline-block">{{ $nameError }}</span>
                     @endif
                     @if($emailError)
-                        <span class="mb-2">{{ $emailError }}</span>
+                        <span class="mb-2 d-inline-block">{{ $emailError }}</span>
                     @endif
                     @if($passwordError)
-                        <span class="mb-2">{{ $spanasswordError }}</span>
+                        <span class="mb-2 d-inline-block">{{ $passwordError }}</span>
                     @endif
                 </div>
             @endif
@@ -37,7 +37,7 @@
                 <label class="form-check-label" for="exampleCheck1">Cochez moi</label>
             </div>
             <button type="submit" class="btn btn-success">S'inscrire</button>
-            <p class="mt-3">Vous avez déjà un compte <i><a href="{{ route('login_page') }}" class="text-black">connectez-vous</a></i></p>
+            <p class="mt-3">Vous avez déjà un compte <i><a href="{{ route('page.login') }}" class="text-black">connectez-vous</a></i></p>
           </form>
     </div>
 </section>

@@ -1,7 +1,7 @@
 @include('_header')
 <section class="login">
     <div class="container d-flex justify-content-center align-items-center login-container">
-        <form class="w-50 my-5 px-5 py-3 form" method="POST" action="{{ route('login') }}">
+        <form class="w-50 my-5 px-5 py-3 form" method="POST" action="{{ route('user.login') }}">
             @csrf
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Email</label>
@@ -21,7 +21,7 @@
               <label class="form-check-label" for="exampleCheck1">Cochez moi</label>
             </div>
             <button type="submit" class="btn btn-success">Se connecter</button>
-            <p class="mt-3">Vous n'avez pas un compte <i><a href="{{ route('register') }}" class="text-black">inscrivez-vous</a></i></p>
+            <p class="mt-3">Vous n'avez pas un compte <i><a href="{{ route('page.register') }}" class="text-black">inscrivez-vous</a></i></p>
           </form>
     </div>
 </section>

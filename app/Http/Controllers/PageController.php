@@ -4,10 +4,6 @@ namespace App\Http\Controllers;
 
 class PageController extends Controller
 {
-    public function acceuil() {
-        return view('welcome');
-    }
-
     public function contact() {
         return view('contact');
     }
@@ -22,5 +18,10 @@ class PageController extends Controller
 
     public function cars() {
         return view('cars');
+    }
+
+    public function createCar() 
+    {
+        return view('dashboard.createCars');
     }
 }

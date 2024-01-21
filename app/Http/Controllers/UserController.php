@@ -35,7 +35,7 @@ class UserController extends Controller
             'password' => Hash::make($request->input('password')),
         ]);
 
-        return redirect()->route('login_page')->with('success', 'Inscription réussie ! Connectez-vous maintenant.');
+        return redirect()->route('page.login')->with('success', 'Inscription réussie ! Connectez-vous maintenant.');
     }
 
     public function login(Request $request)
@@ -46,16 +46,48 @@ class UserController extends Controller
         ]);
 
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')])) {
-            return redirect()->route('acceuil')->with('success', 'Connexion réussie.');
+            return redirect()->route('car.acceuil')->with('success', 'Connexion réussie.');
         }
 
-        return redirect()->route('login_page')->with('error', 'E-mail ou mot de passe incorrect.');
+        return redirect()->route('page.login')->with('error', 'E-mail ou mot de passe incorrect.');
     }
 
     public function logout()
     {
         Auth::logout();
 
-        return redirect()->route('acceuil')->with('success', 'Vous avez été déconnecté.');
+        return redirect()->route('car.acceuil')->with('success', 'Vous avez été déconnecté.');
+    }
+
+    public function users()
+    {
+        $users = User::all(); // Récupère tous les utilisateurs
+
+        return view('dashboard.users', ['users' => $users]); // Envoie les utilisateurs à la vue
+    }
+
+    public function makeAdmin($id)
+    {
+        $user = User::findOrFail($id);
+        $user->update(['role' => 'admin']);
+
+        return redirect()->route('dashboard.users')->with('success', 'Utilisateur nommé administrateur avec succès!');
+    }
+
+    public function removeAdmin($id)
+    {
+        $user = User::findOrFail($id);
+        $user->update(['role' => 'user']);
+
+        return redirect()->route('dashboard.users')->with('success', 'Dénomination de l\'administrateur réussie!');
+    }
+
+    public function rentals($id)
+    {
+        $user = User::with('rentals.car')->find($id);
+
+        $rentals = $user->rentals;
+
+        return view('rentals' , ['rentals' => $rentals]);
     }
 }

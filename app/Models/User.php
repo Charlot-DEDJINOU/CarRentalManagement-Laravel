@@ -10,7 +10,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
     
-    protected $fillable = ['name', 'email', 'password', 'admin'];
+    protected $fillable = ['name', 'email', 'password', 'admin', 'role'];
 
     public function rentals()
     {

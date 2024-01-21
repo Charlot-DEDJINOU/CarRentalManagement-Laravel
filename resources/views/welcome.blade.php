@@ -3,7 +3,7 @@
     <div class="item d-flex flex-column align-items-center justify-content-center text-white">
         <div class="titre text-center">Car Rental Management</div>
         <p class="text-center mb-5 fw-light fs-1">vous souhaite la bienvenue</p>
-        <button class="btn btn-success">Découvrez nos voitures</button>
+        <a href="{{ route('car.cars') }}" class="btn btn-success">Découvrez nos voitures</a>
     </div>
 </section>
 <section class="about py-5">
@@ -13,7 +13,7 @@
                 <h3 class="text-success text-center">À propos de nous</h3>
                 <p class="fw-light">Bienvenue sur notre plateforme de gestion de location de voitures ! Chez [Nom de l'entreprise], nous sommes passionnés par la simplification du processus de location de voitures pour offrir une expérience utilisateur fluide et agréable.Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil sed aliquam ipsum eveniet necessitatibus aliquid pariatur recusandae neque, possimus accusantium sint incidunt. Libero pariatur sequi dolores. Tempora consequatur minima quisquam.</p>
                 <p class="fw-light">Notre mission est de fournir à nos utilisateurs un moyen pratique et efficace de gérer la location de véhicules. Que vous soyez un administrateur gérant un parc automobile ou un utilisateur à la recherche de la voiture parfaite, notre plateforme offre des fonctionnalités robustes et conviviales pour répondre à vos besoins.</p>
-                <button class="btn btn-success">Contactez-nous</button>
+                <a href="{{ route('page.contact') }}" class="btn btn-success">Contactez-nous</a>
           </div>
       </div>
 </section>
@@ -49,30 +49,17 @@
     <div class="container products-container">
         <div class="fs-3 text-success">Nos voitures</div>
         <div class="mt-5 d-flex flex-wrap justify-content-between all-products">
-            <div class="item d-flex flex-column justify-content-between p-3">
-                <img src="assets/v1.webp" alt="voiture" />
-                <div class="fw-light"><b>Designation</b> : Toyota</div>
-                <div class="fw-light"><b>Model</b> : Toyota Camry</div>
-                <button class="btn btn-success">Voir plus</button>
-            </div>
-            <div class="item d-flex flex-column justify-content-between p-3">
-                <img src="assets/v1.webp" alt="voiture" />
-                <div class="fw-light"><b>Designation</b> : Toyota</div>
-                <div class="fw-light"><b>Model</b> : Toyota Camry</div>
-                <button class="btn btn-success">Voir plus</button>
-            </div>
-            <div class="item d-flex flex-column justify-content-between p-3">
-                <img src="assets/v1.webp" alt="voiture" />
-                <div class="fw-light"><b>Designation</b> : Toyota</div>
-                <div class="fw-light"><b>Model</b> : Toyota Camry</div>
-                <button class="btn btn-success">Voir plus</button>
-            </div>
-            <div class="item d-flex flex-column justify-content-between p-3">
-                <img src="assets/v1.webp" alt="voiture" />
-                <div class="fw-light"><b>Designation</b> : Toyota</div>
-                <div class="fw-light"><b>Model</b> : Toyota Camry</div>
-                <button class="btn btn-success">Voir plus</button>
-            </div>
+            @foreach ($cars as $car)
+                <div class="item d-flex flex-column justify-content-between p-3">
+                    <img src="{{ asset($car->images) }}" alt="voiture" />
+                    <div class="fw-light"><b>Designation</b> : {{ $car->brand }}</div>
+                    <div class="fw-light"><b>Model</b> : {{ $car->model }}</div>
+                    <div class="fw-light"><b>Prix</b> : 19$/Jour</div>
+                    <button class="btn btn-success">
+                        <a class="lien" href="{{ route('cars.detail', ['id' => $car->id]) }}">Voir plus</a>
+                    </button>
+                </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -85,7 +72,7 @@
                   <p class="text-justify fw-light">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut ea odit modi saepe facilis culpa recusandae laboriosam ducimus, harum eveniet aliquid corporis minus velit, adipisci qui omnis sequi? Quos, fuga?</p>
                 </div>
                 <div class="testimony-user">
-                  <img src="assets/v1.webp" class="testimony-user-logo">
+                  <img src="{{ asset('assets/v1.webp') }}" class="testimony-user-logo">
                   <p>Charlot DEDJINOU</p>
                 </div>
               <div>Expert Debugger</div>
@@ -95,10 +82,20 @@
                   <p class="text-justify fw-light">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut ea odit modi saepe facilis culpa recusandae laboriosam ducimus, harum eveniet aliquid corporis minus velit, adipisci qui omnis sequi? Quos, fuga?</p>
                 </div>
                 <div class="testimony-user">
-                  <img src="assets/v1.webp" class="testimony-user-logo">
-                  <p>Charlot DEDJINOU</p>
+                  <img src="{{ asset('assets/v4.jpg') }}" class="testimony-user-logo">
+                  <p>Destiny Espoir Joël</p>
                 </div>
-              <div>Expert Debugger</div>
+              <div>Data Scientist</div>
+            </div>
+            <div class="testimony-item p-3">
+                <div class="testimony-text-container">
+                  <p class="text-justify fw-light">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut ea odit modi saepe facilis culpa recusandae laboriosam ducimus, harum eveniet aliquid corporis minus velit, adipisci qui omnis sequi? Quos, fuga?</p>
+                </div>
+                <div class="testimony-user">
+                  <img src="{{ asset('assets/v3.jpg') }}" class="testimony-user-logo">
+                  <p>Samira Bandolo</p>
+                </div>
+              <div>Developpeuse Web</div>
             </div>
             <div class="testimony-item p-3">
                 <div class="testimony-text-container">
@@ -106,19 +103,9 @@
                 </div>
                 <div class="testimony-user">
                   <img src="assets/v1.webp" class="testimony-user-logo">
-                  <p>Charlot DEDJINOU</p>
+                  <p>Samira MVOGO</p>
                 </div>
-              <div>Expert Debugger</div>
-            </div>
-            <div class="testimony-item p-3">
-                <div class="testimony-text-container">
-                  <p class="text-justify fw-light">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut ea odit modi saepe facilis culpa recusandae laboriosam ducimus, harum eveniet aliquid corporis minus velit, adipisci qui omnis sequi? Quos, fuga?</p>
-                </div>
-                <div class="testimony-user">
-                  <img src="assets/v1.webp" class="testimony-user-logo">
-                  <p>Charlot DEDJINOU</p>
-                </div>
-              <div>Expert Debugger</div>
+              <div>Developpeuse Mobile</div>
             </div>
         </div>
     </div>

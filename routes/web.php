@@ -5,6 +5,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\RentalController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,28 +19,34 @@ use App\Http\Controllers\RentalController;
 */
 
 // routes/web.php
+Route::middleware([\App\Http\Middleware\AuthMiddleware::class])->group(function () {
+    // Les routes qui nécessitent l'authentification vont ici
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/dashbord/cars', [DashboardController::class, 'cars'])->name('dashboard.cars');
+    Route::get('/dashboard/cars/create', [PageController::class, 'createCar'])->name('page.createCar');
+    Route::post('/dashboard/cars/create', [CarController::class, 'create'])->name('cars.create');
+    Route::get('/dashboard/cars/edit/{id}',[CarController::class, 'edit'])->name('cars.edit');
+    Route::put('/dashboard/cars/update/{id}', [CarController::class, 'update'])->name('cars.update');
+    Route::delete('/dashboard/cars/delete/{id}', [CarController::class, 'destroy'])->name('cars.delete');
+    Route::get('/dashboard/users', [DashboardController::class ,'users'])->name('dashboard.users');
+    Route::put('/dashboard/users/role/admin/{id}', [UserController::class ,'makeAdmin'])->name('user.makeAdmin');
+    Route::put('/dashboard/users/role/user/{id}', [UserController::class ,'removeAdmin'])->name('user.removeAdmin');
+    Route::get('/dashboard/rentals', [DashboardController::class , 'rentals'])->name('dashboard.rentals');
+    Route::put('/dashboard/rental/status/{status}/{id}', [RentalController::class, 'status'])->name('rental.status');
+    Route::delete('/dashboard/rental/delete/{id}', [RentalController::class, 'destroy'])->name('rental.delete');
+    Route::get('/logout', [UserController::class ,'logout'])->name('user.logout');
 
-// Routes pour les pages statiques gérées par PageController
-Route::get('/', [PageController::class, 'acceuil'])->name('acceuil');
-Route::get('/contact', [PageController::class, 'contact'])->name('contact');
-Route::get('/cars', [PageController::class, 'cars'])->name('cars');
-Route::get('/register', [PageController::class, 'register'])->name('register_page');
-Route::get('/login', [PageController::class, 'login'])->name('login_page');
-Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard');
-Route::get('/cars_create', [PageController::class, 'create_car'])->name('cars_create_page');
+    Route::get('/users/rentals/{id}', [UserController::class , 'rentals'])->name('users.rentals');
+    Route::post('/rentals/create/{carId}', [RentalController::class , 'create'])->name('rental.create');
+});
 
-// Routes concernant le model User
-Route::post('/register', [UserController::class ,'register'])->name('register');
-Route::post('/login', [UserController::class ,'login'])->name('login');
-Route::get('/logout', [UserController::class ,'logout'])->name('logout');
-Route::get('/users', [UserController::class ,'users'])->name('users');
+// Les autres routes ici (qui ne nécessitent pas d'authentification)
 
-// Routes concernant le model Car
-Route::get('/cars', [CarController::class, 'cars'])->name('cars');
-Route::post('/cars_create', [CarController::class, 'create'])->name('cars_create');
-Route::get('/cars_edit/{id}', [CarController::class, 'edit'])->name('cars_edit');
-Route::put('/cars_update/{id}', [CarController::class, 'update'])->name('cars_update');
-Route::delete('/cars_delete/{id}', [CarController::class, 'delete'])->name('cars_delete');
-
-// Routes concernant le model Rental
-Route::get('rentals', [RentalController::class , 'rentals'])->name('rentals');
+Route::get('/', [CarController::class, 'acceuil'])->name('car.acceuil');
+Route::get('/contact', [PageController::class, 'contact'])->name('page.contact');
+Route::get('/cars', [CarController::class, 'cars'])->name('car.cars');
+Route::get('/register', [PageController::class, 'register'])->name('page.register');
+Route::get('/login', [PageController::class, 'login'])->name('page.login');
+Route::post('/register', [UserController::class ,'register'])->name('user.register');
+Route::post('/login', [UserController::class ,'login'])->name('user.login');
+Route::get('/cars/detail/{id}', [CarController::class, 'detail'])->name('cars.detail');
